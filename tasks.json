@@ -1,0 +1,83 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // for the documentation about the tasks.json format
+	//! g++
+	// "version": "2.0.0",
+	// "tasks": [
+	// 	{
+	// 		"type": "cppbuild", 
+	// 		"label": "g++ build",
+	// 		"command": "E:\\minGW\\bin\\g++.exe",
+	// 		"args": [
+	// 			"-fdiagnostics-color=always",
+	// 			"-g",
+	// 			"${file}",
+	// 			"-o",
+	// 			"${workspaceFolder}/build/${fileBasenameNoExtension}.exe", //"${fileDirname}\\${fileBasenameNoExtension}.exe"
+	// 			//"-fexec-charset=GBK" //防止中文乱码
+	// 		],
+	// 		"options": {
+	// 			"cwd": "${workspaceFolder}/build"
+	// 		},
+	// 		"problemMatcher": [
+	// 			"$gcc"
+	// 		],
+	// 		"group": {
+	// 			"kind": "build",
+	// 			"isDefault": true	//表示快捷键Ctrl+Shift+B可以运行该任务
+	// 		},
+	// 		"detail": "编译器: E:\\minGW\\bin\\g++.exe"
+	// 	}
+	// ]
+
+	//! cmake
+	"version": "2.0.0",
+	"options": {
+		"cwd": "${workspaceFolder}/build"
+	},
+
+	"tasks": [
+		{
+			"type": "shell", 
+			"label": "cmake build",
+			"command": "cmake",
+			"args": [
+				"-G MinGW Makefiles",	//这种不用输"", 自己输命令需要
+				"..",
+				"-DCMAKE_BUILD_TYPE=Debug" //打断点用
+			],
+			"problemMatcher": [],
+		},
+
+		{
+			"type": "shell", 
+			"label": "Make",
+			"command": "make", //mingw32-make.exe
+			"args": [],
+			"dependsOn":[
+				"cmake build"
+			],
+			"problemMatcher": [],
+		},
+
+		{
+			"label": "Build",   // 第三个任务,取名叫"Build"
+			"dependsOn": [
+			  "Make"         // 现在这个任务依赖一个名字叫"mingw32-make"的命令,要等"mingw32-make"执行完之后再执行.
+			],
+			"group": {                  //下面这些照着抄就行
+			  "kind": "build",
+			  "isDefault": true
+			},
+			"presentation": {
+			  "echo": true,
+			  "reveal": "always",
+			  "focus": false,
+			  "panel": "shared",
+			  "showReuseMessage": true,
+			  "clear": false
+			}
+		}
+
+	]
+}

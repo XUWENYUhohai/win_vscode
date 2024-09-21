@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch", 
+            "preLaunchTask": "Build",  //  g++ build
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/${fileBasenameNoExtension}.exe", 
+            "args": [],
+            "stopAtEntry": false, // 选为true则会在打开控制台后停滞，暂时不执行程序
+            "cwd": "${workspaceFolder}/build", // 当前工作路径：当前文件所在的工作空间
+            "environment": [],
+            "externalConsole": false,  // 是否使用外部控制台
+            "MIMode": "gdb",  
+            "miDebuggerPath": "E:\\minGW\\bin\\gdb.exe",  //g++ 编译后,对应的调试器叫gdb,换成你的路径
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
